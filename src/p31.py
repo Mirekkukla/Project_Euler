@@ -1,23 +1,21 @@
 from datetime import datetime
-def numWays(remains, theList):
-    global tuples_seen
-    if remains == 0:
+import math
+
+# in each recursive call, only use coins smaller than the ones just tried
+def numWays(remains, coins):
+    if remains < 0 or (len(coins) == 0 and remains > 0):
+        return 0
+    elif remains == 0:
         return 1
     else:
+        highest = coins.pop()
         total = 0
-        coins = [200, 100, 50, 20, 10, 5, 2, 1]
-        for i in coins:
-            if remains - i < 0: #not a viable combination
-                continue
-            copyList = list(theList)
-            index = coins.index(i)
-            copyList[index] += 1
-            if not tuple(copyList) in tuples_seen:
-                tuples_seen.add(tuple(copyList)) 
-                total += numWays(remains - i, copyList)
+        for i in range(0, math.floor(remains/highest) + 1):
+            coins_copy = list(coins)
+            total += numWays(remains - i*highest, coins_copy)
         return total
 
 startTime = datetime.now()
-tuples_seen = set()
-print(numWays(200, [0] * 8))
+coins = [1, 2, 5, 10, 20, 50, 100, 200]
+print(numWays(200, coins))
 print(datetime.now() - startTime)
