@@ -15,7 +15,7 @@ while k <= num_digits:
 
 total_sum = 0
 for i in range(2,int(highest_pos) + 1):
-    digits = getDigits(i)
+    digits = getArrayFromNum(i)
     i_sum = 0
     for d in digits:
         i_sum += pow(d,exponent)

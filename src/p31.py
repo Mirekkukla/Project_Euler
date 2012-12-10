@@ -1,4 +1,5 @@
 from datetime import datetime
+
 def numWays(remains, theList):
     global tuples_seen
     if remains == 0:
