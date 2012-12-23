@@ -10,10 +10,10 @@ def numWays(remains, index):
         return 1
     else:
         highest = coins[index]
-        total = 0
+        result = 0
         for i in range(0, math.floor(remains/highest) + 1):
-            total += numWays(remains - i*highest, index - 1)
-        return total
+            result += numWays(remains - i*highest, index - 1)
+        return result
 
 startTime = datetime.now()
 coins = [1, 2, 5, 10, 20, 50, 100, 200]

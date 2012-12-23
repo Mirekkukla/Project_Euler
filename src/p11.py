@@ -11,28 +11,28 @@ numCols = numRows #assuming we have an nxn array
 #make the input be ints instead of strings
 for i in range(numRows):
 	rows[i] = rows[i].split(' ')
-	for j in range(numCols):	
-		rows[i][j] = int(rows[i][j])
+	for p in range(numCols):	
+		rows[i][p] = int(rows[i][p])
 
 maxProd = 0
 for i in range(numRows):
-	for j in range(numCols):
+	for p in range(numCols):
 		tempL = 1
 		tempLD = 1
 		tempD = 1
 		tempRD = 1
 		for k in range(4):
-			if ((j-3+k) >= 0) and ((j-3+k) <= (numCols - 1)):
-				tempL *= rows[i][j-3+k]
+			if ((p-3+k) >= 0) and ((p-3+k) <= (numCols - 1)):
+				tempL *= rows[i][p-3+k]
 				if ((i+3-k) >= 0) and ((i+3-k) <= (numRows - 1)):
-					tempLD *= rows[i+3-k][j-3+k]
+					tempLD *= rows[i+3-k][p-3+k]
 
 			if ((i+k) >=0) and ((i+k) <= (numRows - 1)):
-				tempD *= rows[i+k][j]
-				if ((j+k) >= 0) and ((j+k) <= (numCols - 1)):
-					tempRD *= rows[i+k][j+k]
+				tempD *= rows[i+k][p]
+				if ((p+k) >= 0) and ((p+k) <= (numCols - 1)):
+					tempRD *= rows[i+k][p+k]
 
-		biggestHere = max([tempL, tempLD, tempD, tempRD]) 
+		biggestHere = max_prod([tempL, tempLD, tempD, tempRD]) 
 		if biggestHere > maxProd:
 			maxProd = biggestHere
 print(maxProd)

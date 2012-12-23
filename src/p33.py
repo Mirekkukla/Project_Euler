@@ -20,8 +20,8 @@ def isCurious(arr):
     if a % 10 == 0: # trivial example (zeros cancel)
         return False
     for i in range(0,2):
-        for j in range(0,2):
-            if top[i] == bot[j] and top[int(math.fabs(i - 1))] == c and bot[int(math.fabs(j - 1))] == d:
+        for p in range(0,2):
+            if top[i] == bot[p] and top[int(math.fabs(i - 1))] == c and bot[int(math.fabs(p - 1))] == d:
                 return True
     return False
 
@@ -40,9 +40,9 @@ def hasCuriousPartner(arr):
 def setOfCurious():
     candidates = set()
     for i in range(10, 99): #numerator
-        for j in range(i + 1, 100): #denominator
-            if hasCuriousPartner([i,j]):
-                candidates.add(tuple([i,j]))
+        for p in range(i + 1, 100): #denominator
+            if hasCuriousPartner([i,p]):
+                candidates.add(tuple([i,p]))
     return candidates
 
 candidates = setOfCurious()

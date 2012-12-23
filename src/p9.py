@@ -1,14 +1,12 @@
 #Project Euler prob 9: p9.py
-import math
-sum = 1000
-maxNum = sum
-breakAgain = False
-for i in range(1,maxNum):
-	for j in range(i+1,maxNum+1):
-		if math.sqrt(i**2 + j**2) == sum - i - j:
-			print(i*j*(sum-i-j))
-			breakAgain = True
-			break
-	if breakAgain == True:
-		break
 
+# Use a function so that we can break out of both loops
+def findTriplet(p):
+	for a in range(1,(p-2)+1):
+		for b in range(a+1,(p-1)+1):
+			c = p - (a + b)
+			if a**2 + b**2 == c**2:
+				return a*b*c
+	return -1
+
+print(findTriplet(1000))

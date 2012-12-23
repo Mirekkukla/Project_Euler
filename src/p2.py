@@ -1,13 +1,13 @@
 #Project Euler Problem 2: p2.py
-sum = 0
-last = 1
-cur = 1
-temp = 0
+even_fib_sum = 0
+last_fib = 1
+cur_fib = 1
 
-while cur <= 4000000:
-	if cur % 2 == 0:
-		sum = sum + cur
-	temp = cur
-	cur = cur + last
-	last = temp
-print(sum)
+while cur_fib <= 4000000:
+	if cur_fib % 2 == 0:
+		even_fib_sum += cur_fib
+	cur_fib_copy = cur_fib
+	cur_fib = cur_fib + last_fib
+	last_fib = cur_fib_copy
+
+print(even_fib_sum)

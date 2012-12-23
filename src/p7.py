@@ -1,15 +1,12 @@
 #project Euler prob 7: p7/py
-primes = []
-i = 2
+from functions.primes import isPrime
+
+i = 1
+count = 0
 while True:
-	isPrime = True
-	for j in range(len(primes)):
-		if i % primes[j] == 0:
-			isPrime = False
-			break
-	if isPrime:
-		primes.append(i)
-	if len(primes) == 10001:
+	if isPrime(i):
+		count += 1
+	if count == 10001:
 		break
 	i += 1
-print(primes[-1])
+print(i)

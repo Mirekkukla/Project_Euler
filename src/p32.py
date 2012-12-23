@@ -9,9 +9,9 @@ def allPand(arr):
         remainders = list(range(1,10))
         for i in arr:
             remainders.remove(i)
-        for j in remainders:
+        for p in remainders:
             arr_copy = list(arr)
-            arr_copy.append(j)
+            arr_copy.append(p)
             allPand(arr_copy)
 
 def addIfPand(arr):

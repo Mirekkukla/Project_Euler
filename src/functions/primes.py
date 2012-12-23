@@ -9,11 +9,16 @@ def isPrime(n):
             return False
     return True
 
-
+# Returns a counter of prime factors - ie, a dictionary
+# that maps each prime factors to it number of occurences
 def primeFactorization(n):
-    cnt = collections.Counter()
-    for i in range(2,math.floor(math.sqrt(n)) + 1):
+    return __smartPrimeFactorization(n,2)
+
+# Don't re-check small number we know are divisors
+def __smartPrimeFactorization(n, smallest_cand):
+    req_primes = collections.Counter()
+    for i in range(smallest_cand,math.floor(math.sqrt(n)) + 1):
         if n % i == 0:
-            cnt[i] += 1
-            return cnt + primeFactorization(int(n / i))
-    return collections.Counter([n])
+            req_primes[i] += 1
+            return req_primes + __smartPrimeFactorization(int(n / i), i)
+    return collections.Counter([n]) #n is a prime
