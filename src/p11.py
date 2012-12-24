@@ -1,38 +1,40 @@
 #Project Euler prob 11: p11.py
-rows = []
-f = open("p11data", 'r')
-for line in f:
-	rows.append(str(line))
-for i in range(len(rows)):
-	rows[i] = rows[i][0:len(rows[i])-1]#take off the endline chars
+
+#takes 4x4 array of nums, returns the max
+#same-direction-product
+def getBoxMax(A):
+	box_max = 0
+	down_diag = up_diag = 1
+	for i in range(4):
+		down_diag *= A[i][i]
+		up_diag *= A[i][3-i]
+		row_i = col_i = 1
+		for j in range(4):
+			row_i *= A[i][j]
+			col_i *= A[j][i]
+		box_max = max(box_max, row_i, col_i)
+	box_max = max(box_max, up_diag, down_diag)
+	return box_max
+
+def importData():
+	rows = []
+	f = open("files/p11data", 'r')
+	for line in f:
+		row = line.strip().split(' ')
+		for i in range(len(row)):
+			row[i] = int(row[i])
+		rows.append(row)
+	return rows
+
+rows = importData()
 numRows = len(rows)
-numCols = numRows #assuming we have an nxn array
-
-#make the input be ints instead of strings
-for i in range(numRows):
-	rows[i] = rows[i].split(' ')
-	for p in range(numCols):	
-		rows[i][p] = int(rows[i][p])
-
-maxProd = 0
-for i in range(numRows):
-	for p in range(numCols):
-		tempL = 1
-		tempLD = 1
-		tempD = 1
-		tempRD = 1
+global_max = 0
+for i in range(numRows - 3):
+	for j in range(numRows - 3):
+		A = rows[i:i+4]
 		for k in range(4):
-			if ((p-3+k) >= 0) and ((p-3+k) <= (numCols - 1)):
-				tempL *= rows[i][p-3+k]
-				if ((i+3-k) >= 0) and ((i+3-k) <= (numRows - 1)):
-					tempLD *= rows[i+3-k][p-3+k]
-
-			if ((i+k) >=0) and ((i+k) <= (numRows - 1)):
-				tempD *= rows[i+k][p]
-				if ((p+k) >= 0) and ((p+k) <= (numCols - 1)):
-					tempRD *= rows[i+k][p+k]
-
-		biggestHere = max_prod([tempL, tempLD, tempD, tempRD]) 
-		if biggestHere > maxProd:
-			maxProd = biggestHere
-print(maxProd)
+			A[k] = A[k][j:j+4]
+		box_max = getBoxMax(A)
+		if box_max > global_max:
+			global_max = box_max
+print(global_max)
