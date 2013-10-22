@@ -9,11 +9,12 @@ def getArrayFromNum(n):
     return ret
 
 def getNumFromArray(arr):
-    digits = len(arr)
+    copy_arr = list(arr)
+    digits = len(copy_arr)
     result = 0
-    arr.reverse()
+    copy_arr.reverse()
     for i in range(0,digits):
-        result += arr[i]*pow(10,i)
+        result += copy_arr[i]*pow(10,i)
     return int(result)
 
 def numDigits(n):
