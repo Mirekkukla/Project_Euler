@@ -1,10 +1,10 @@
-import math
+from math import sqrt, floor
 import collections
 
 def isPrime(n):
     if n == 1:
         return False
-    for i in range(2,math.floor(math.sqrt(n)) + 1):
+    for i in range(2,floor(sqrt(n)) + 1):
         if n % i == 0:
             return False
     return True
@@ -17,7 +17,7 @@ def primeFactorization(n):
 # Don't re-check small number we know are divisors
 def __smartPrimeFactorization(n, smallest_cand):
     req_primes = collections.Counter()
-    for i in range(smallest_cand,math.floor(math.sqrt(n)) + 1):
+    for i in range(smallest_cand,floor(sqrt(n)) + 1):
         if n % i == 0:
             req_primes[i] += 1
             return req_primes + __smartPrimeFactorization(int(n / i), i)
